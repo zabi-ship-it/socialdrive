@@ -1,0 +1,1525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SocialDrive - Clickable Wireframe</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+        }
+
+        /* Header & Nav */
+        header {
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2563eb;
+        }
+
+        nav {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            padding: 8px 16px;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .nav-btn:hover {
+            background: #f0f0f0;
+        }
+
+        .nav-btn.active {
+            background: #2563eb;
+            color: white;
+        }
+
+        .btn-primary {
+            background: #2563eb;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+        }
+
+        .btn-secondary {
+            background: #e0e0e0;
+            color: #333;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: #d0d0d0;
+        }
+
+        .btn-success {
+            background: #10b981;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .btn-success:hover {
+            background: #059669;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Screen Control */
+        .screen {
+            display: none;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 40px;
+            min-height: 600px;
+        }
+
+        .screen.active {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 60px 40px;
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+            color: white;
+            border-radius: 8px;
+            margin-bottom: 40px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-buttons button {
+            padding: 15px 30px;
+            font-size: 16px;
+        }
+
+        /* Card Grid */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+            color: #2563eb;
+        }
+
+        .card p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .card-badge {
+            display: inline-block;
+            background: #10b981;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+
+        .card-rating {
+            color: #f59e0b;
+            font-weight: bold;
+        }
+
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d0d0d0;
+            border-radius: 4px;
+            font-size: 14px;
+            font-family: inherit;
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        /* Listing Details */
+        .listing-header {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .listing-image {
+            background: #e0e0e0;
+            height: 300px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 18px;
+        }
+
+        .listing-info h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .price {
+            font-size: 32px;
+            color: #10b981;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .expert-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #dbeafe;
+            color: #1e40af;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .expert-badge::before {
+            content: "✓";
+            font-weight: bold;
+        }
+
+        /* Review Section */
+        .review-card {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 15px;
+        }
+
+        .reviewer-info {
+            font-weight: 500;
+        }
+
+        .reviewer-date {
+            font-size: 12px;
+            color: #999;
+        }
+
+        .stars {
+            color: #f59e0b;
+            font-size: 14px;
+        }
+
+        .review-text {
+            color: #666;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 0;
+            border-bottom: 2px solid #e0e0e0;
+            margin-bottom: 20px;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 15px 25px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #666;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .tab-btn.active {
+            color: #2563eb;
+            border-bottom-color: #2563eb;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Inspection Report */
+        .inspection-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .inspection-item:last-child {
+            border-bottom: none;
+        }
+
+        .inspection-label {
+            flex: 1;
+        }
+
+        .inspection-score {
+            font-weight: bold;
+            color: #2563eb;
+            min-width: 60px;
+            text-align: right;
+        }
+
+        .score-good { color: #10b981; }
+        .score-fair { color: #f59e0b; }
+        .score-poor { color: #ef4444; }
+
+        /* Checkout */
+        .order-summary {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 25px;
+            margin-top: 30px;
+        }
+
+        .order-line {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        .order-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 18px;
+            font-weight: bold;
+            padding-top: 15px;
+            border-top: 2px solid #e0e0e0;
+            margin-top: 15px;
+        }
+
+        /* Layout Grid */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .grid-2, .listing-header {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 32px;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+            }
+        }
+
+        /* Rating Widget */
+        .rating-group {
+            margin-bottom: 20px;
+        }
+
+        .rating-label {
+            font-weight: 500;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .rating-stars {
+            display: flex;
+            gap: 8px;
+            font-size: 28px;
+        }
+
+        .star {
+            cursor: pointer;
+            color: #d1d5db;
+            transition: all 0.2s;
+        }
+
+        .star:hover, .star.active {
+            color: #f59e0b;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #999;
+            font-size: 12px;
+            margin-top: 40px;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .breadcrumb a {
+            color: #2563eb;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        /* Step Indicator */
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+
+        .step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+
+        .step::after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            right: -50%;
+            height: 2px;
+            background: #e0e0e0;
+            z-index: 0;
+        }
+
+        .step:last-child::after {
+            display: none;
+        }
+
+        .step-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            font-weight: bold;
+            color: white;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step.active .step-circle {
+            background: #2563eb;
+        }
+
+        .step.completed .step-circle {
+            background: #10b981;
+        }
+
+        .step-label {
+            font-size: 12px;
+            margin-top: 8px;
+        }
+
+        /* Modal/Alert */
+        .alert {
+            background: #dbeafe;
+            border: 1px solid #93c5fd;
+            border-radius: 4px;
+            padding: 15px;
+            margin-bottom: 20px;
+            color: #1e40af;
+        }
+
+        .alert.success {
+            background: #dcfce7;
+            border-color: #86efac;
+            color: #166534;
+        }
+
+        .alert.warning {
+            background: #fef3c7;
+            border-color: #fcd34d;
+            color: #92400e;
+        }
+
+        h1, h2, h3 {
+            margin-bottom: 15px;
+        }
+
+        section {
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">🚗 SocialDrive</div>
+        <nav>
+            <button class="nav-btn active" onclick="showScreen('home')">Home</button>
+            <button class="nav-btn" onclick="showScreen('seller-dashboard')">Sell Car</button>
+            <button class="nav-btn" onclick="showScreen('browse-listings')">Buy Car</button>
+            <button class="nav-btn" onclick="showScreen('my-transactions')">My Activity</button>
+        </nav>
+        <button class="btn-primary" onclick="showScreen('login')">Login / Sign Up</button>
+    </header>
+
+    <main>
+        <!-- HOME SCREEN -->
+        <div id="home" class="screen active">
+            <div class="hero">
+                <h1>Welcome to SocialDrive</h1>
+                <p>Buy and sell used cars with confidence. Expert inspections + Community reviews = Smart decisions</p>
+                <div class="cta-buttons">
+                    <button class="btn-primary" onclick="showScreen('browse-listings')">Browse Listings</button>
+                    <button class="btn-secondary" onclick="showScreen('seller-dashboard')">Sell Your Car</button>
+                </div>
+            </div>
+
+            <section>
+                <h2>How It Works</h2>
+                <div class="card-grid">
+                    <div class="card" onclick="showScreen('seller-list-car')">
+                        <h3>1. Sellers List Cars</h3>
+                        <p>Add your vehicle details and photos. Request expert inspection to get fair market pricing.</p>
+                    </div>
+                    <div class="card" onclick="alert('Expert inspectors verify vehicle condition, negotiate price, and display verified listing')">
+                        <h3>2. Experts Verify</h3>
+                        <p>Professional inspectors assess your car and recommend optimal pricing based on market data.</p>
+                    </div>
+                    <div class="card" onclick="alert('Buyers schedule test drives, share their experiences and ratings')">
+                        <h3>3. Community Reviews</h3>
+                        <p>Test drivers share authentic experiences and rate cars on performance, comfort, and more.</p>
+                    </div>
+                    <div class="card" onclick="showScreen('listing-details')">
+                        <h3>4. Buyers Decide</h3>
+                        <p>Review expert inspection, community ratings, and test drive feedback to make smart purchases.</p>
+                    </div>
+                    <div class="card" onclick="alert('Secure payment processing with escrow protection')">
+                        <h3>5. Safe Transactions</h3>
+                        <p>Platform handles payments, manages escrow, and facilitates paperwork for smooth transactions.</p>
+                    </div>
+                    <div class="card" onclick="alert('We charge 5-8% commission on successful sales')">
+                        <h3>6. Great Deals</h3>
+                        <p>Transparent pricing. Platform earns small commission per sale while keeping prices fair.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- LOGIN SCREEN -->
+        <div id="login" class="screen">
+            <h1>Sign In to SocialDrive</h1>
+            <div style="max-width: 400px;">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" placeholder="your@email.com">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" placeholder="Enter password">
+                </div>
+                <button class="btn-primary" style="width: 100%;" onclick="showScreen('home')">Sign In</button>
+                <p style="margin-top: 15px; text-align: center; color: #666;">
+                    New user? <a href="#" onclick="alert('Sign up form would appear here')" style="color: #2563eb; cursor: pointer;">Create account</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- SELLER: LIST CAR -->
+        <div id="seller-list-car" class="screen">
+            <div class="breadcrumb">
+                <a onclick="showScreen('seller-dashboard')">Seller Dashboard</a> > List New Car
+            </div>
+            <h1>List Your Car for Sale</h1>
+            
+            <div class="steps">
+                <div class="step completed">
+                    <div class="step-circle">✓</div>
+                    <div class="step-label">Vehicle Info</div>
+                </div>
+                <div class="step active">
+                    <div class="step-circle">2</div>
+                    <div class="step-label">Photos & Details</div>
+                </div>
+                <div class="step">
+                    <div class="step-circle">3</div>
+                    <div class="step-label">Request Inspection</div>
+                </div>
+                <div class="step">
+                    <div class="step-circle">4</div>
+                    <div class="step-label">List Live</div>
+                </div>
+            </div>
+
+            <section>
+                <h2>Vehicle Information</h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Make</label>
+                        <input type="text" placeholder="Toyota" value="Toyota">
+                    </div>
+                    <div class="form-group">
+                        <label>Model</label>
+                        <input type="text" placeholder="Camry" value="Camry">
+                    </div>
+                    <div class="form-group">
+                        <label>Year</label>
+                        <input type="number" placeholder="2020" value="2020">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Mileage (miles)</label>
+                        <input type="number" placeholder="45000" value="45000">
+                    </div>
+                    <div class="form-group">
+                        <label>Transmission</label>
+                        <select>
+                            <option>Automatic</option>
+                            <option>Manual</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Fuel Type</label>
+                        <select>
+                            <option>Gasoline</option>
+                            <option>Hybrid</option>
+                            <option>Electric</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea placeholder="Well-maintained, single owner, no accidents, regular service records available...">Well-maintained, single owner, no accidents, regular service records available</textarea>
+                </div>
+
+                <button class="btn-primary" onclick="showScreen('seller-request-inspection')">Next: Request Inspection</button>
+            </section>
+        </div>
+
+        <!-- SELLER: REQUEST INSPECTION -->
+        <div id="seller-request-inspection" class="screen">
+            <div class="breadcrumb">
+                <a onclick="showScreen('seller-dashboard')">Seller Dashboard</a> > Request Inspection
+            </div>
+            <h1>Request Expert Inspection</h1>
+
+            <div class="alert">
+                <strong>Expert inspection helps you get a fair price.</strong> Professional inspectors will assess your vehicle and recommend optimal pricing.
+            </div>
+
+            <section>
+                <h2>Inspection Options</h2>
+                <div class="card-grid">
+                    <div class="card" style="border: 2px solid #2563eb; cursor: default;">
+                        <h3>Standard Inspection</h3>
+                        <p>50-point inspection checklist</p>
+                        <p style="margin-top: 15px;"><strong>$99</strong></p>
+                        <p style="color: #10b981; font-weight: bold;">Recommended</p>
+                    </div>
+                    <div class="card" style="cursor: default;">
+                        <h3>Premium Inspection</h3>
+                        <p>100-point detailed inspection + video</p>
+                        <p style="margin-top: 15px;"><strong>$199</strong></p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Schedule Inspection</h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Preferred Date</label>
+                        <input type="date">
+                    </div>
+                    <div class="form-group">
+                        <label>Time Slot</label>
+                        <select>
+                            <option>9:00 AM - 11:00 AM</option>
+                            <option>1:00 PM - 3:00 PM</option>
+                            <option>3:00 PM - 5:00 PM</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Inspection Location</label>
+                    <select>
+                        <option>At my location (Address)</option>
+                        <option>At inspection center</option>
+                    </select>
+                </div>
+
+                <button class="btn-success" onclick="showScreen('seller-inspection-confirmed')">Confirm & Pay $99</button>
+                <button class="btn-secondary" onclick="showScreen('seller-dashboard')">Cancel</button>
+            </section>
+        </div>
+
+        <!-- SELLER: INSPECTION CONFIRMED -->
+        <div id="seller-inspection-confirmed" class="screen">
+            <div class="alert success">
+                <strong>✓ Inspection Scheduled!</strong> Your inspection is confirmed for April 2, 2026 at 10:00 AM.
+            </div>
+
+            <h1>What Happens Next?</h1>
+            <div class="card-grid">
+                <div class="card" style="cursor: default;">
+                    <h3>📅 Inspection Day</h3>
+                    <p>Inspector visits and conducts comprehensive assessment of your vehicle.</p>
+                </div>
+                <div class="card" style="cursor: default;">
+                    <h3>💬 Price Negotiation</h3>
+                    <p>Inspector recommends fair market price. You approve the final price.</p>
+                </div>
+                <div class="card" style="cursor: default;">
+                    <h3>📊 Live Listing</h3>
+                    <p>Your car goes live with "Expert Verified" badge - appears in top search results.</p>
+                </div>
+            </div>
+
+            <button class="btn-primary" onclick="showScreen('seller-dashboard')">Back to Dashboard</button>
+        </div>
+
+        <!-- SELLER: DASHBOARD -->
+        <div id="seller-dashboard" class="screen">
+            <h1>Seller Dashboard</h1>
+
+            <section>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+                    <h2>My Listings</h2>
+                    <button class="btn-primary" onclick="showScreen('seller-list-car')">+ List New Car</button>
+                </div>
+
+                <div class="card-grid">
+                    <div class="card" onclick="showScreen('listing-details')">
+                        <div style="background: #e0e0e0; height: 150px; border-radius: 4px; margin-bottom: 15px;"></div>
+                        <h3>2020 Toyota Camry</h3>
+                        <p>45,000 miles | Automatic | Gasoline</p>
+                        <div class="expert-badge">Expert Verified</div>
+                        <p style="margin-top: 10px;"><strong>$18,500</strong></p>
+                        <p style="margin-top: 5px; color: #666; font-size: 13px;">5 test drives scheduled</p>
+                    </div>
+
+                    <div class="card" onclick="alert('Inspection pending...')">
+                        <div style="background: #e0e0e0; height: 150px; border-radius: 4px; margin-bottom: 15px;"></div>
+                        <h3>2019 Honda Civic</h3>
+                        <p>32,000 miles | Manual | Gasoline</p>
+                        <span style="background: #f59e0b; color: white; padding: 4px 12px; border-radius: 20px; font-size: 12px;">Pending Inspection</span>
+                        <p style="margin-top: 10px;"><strong>-</strong></p>
+                        <p style="margin-top: 5px; color: #666; font-size: 13px;">Inspection scheduled April 5</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- BROWSE LISTINGS -->
+        <div id="browse-listings" class="screen">
+            <h1>Browse Available Cars</h1>
+
+            <section>
+                <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 25px; margin-bottom: 25px;">
+                    <div>
+                        <h3>Filters</h3>
+                        <div class="form-group">
+                            <label>Price Range</label>
+                            <input type="number" placeholder="Min: $" style="margin-bottom: 8px;">
+                            <input type="number" placeholder="Max: $">
+                        </div>
+                        <div class="form-group">
+                            <label>Make</label>
+                            <select>
+                                <option>All Makes</option>
+                                <option>Toyota</option>
+                                <option>Honda</option>
+                                <option>Ford</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Min Rating</label>
+                            <select>
+                                <option>All</option>
+                                <option>4+ Stars</option>
+                                <option>3+ Stars</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Expert Verified Only</label>
+                            <input type="checkbox" checked>
+                        </div>
+                        <button class="btn-primary" style="width: 100%;">Apply Filters</button>
+                    </div>
+
+                    <div>
+                        <div class="card-grid" style="grid-template-columns: 1fr;">
+                            <div class="card" onclick="showScreen('listing-details')" style="cursor: pointer; display: grid; grid-template-columns: 150px 1fr; gap: 20px;">
+                                <div style="background: #e0e0e0; height: 150px; border-radius: 4px;"></div>
+                                <div>
+                                    <div class="expert-badge">Expert Verified</div>
+                                    <h3>2020 Toyota Camry</h3>
+                                    <p style="color: #666; font-size: 14px;">45,000 miles | Automatic | Gasoline</p>
+                                    <div class="card-rating">★★★★★ 4.8/5 (12 reviews)</div>
+                                    <p class="price">$18,500</p>
+                                </div>
+                            </div>
+
+                            <div class="card" onclick="alert('View listing details')" style="cursor: pointer; display: grid; grid-template-columns: 150px 1fr; gap: 20px;">
+                                <div style="background: #e0e0e0; height: 150px; border-radius: 4px;"></div>
+                                <div>
+                                    <div class="expert-badge">Expert Verified</div>
+                                    <h3>2019 Honda Accord</h3>
+                                    <p style="color: #666; font-size: 14px;">38,000 miles | Automatic | Hybrid</p>
+                                    <div class="card-rating">★★★★☆ 4.4/5 (8 reviews)</div>
+                                    <p class="price">$19,200</p>
+                                </div>
+                            </div>
+
+                            <div class="card" onclick="alert('View listing details')" style="cursor: pointer; display: grid; grid-template-columns: 150px 1fr; gap: 20px;">
+                                <div style="background: #e0e0e0; height: 150px; border-radius: 4px;"></div>
+                                <div>
+                                    <h3>2021 Ford F-150</h3>
+                                    <p style="color: #666; font-size: 14px;">22,000 miles | Automatic | Gasoline</p>
+                                    <div class="card-rating">★★★☆☆ 3.9/5 (5 reviews)</div>
+                                    <p class="price">$27,900</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- LISTING DETAILS -->
+        <div id="listing-details" class="screen">
+            <div class="breadcrumb">
+                <a onclick="showScreen('browse-listings')">Browse Cars</a> > Listing Details
+            </div>
+
+            <div class="listing-header">
+                <div class="listing-image">
+                    [Car Images Carousel]
+                </div>
+                <div class="listing-info">
+                    <h2>2020 Toyota Camry</h2>
+                    <div class="expert-badge">Expert Verified • Verified on March 20, 2026</div>
+                    <div class="price">$18,500</div>
+                    <div style="margin-bottom: 20px; color: #666; font-size: 14px;">
+                        <p>45,000 miles • Automatic Transmission • Gasoline</p>
+                        <p>Seller: John Smith • Member since 2025</p>
+                    </div>
+                    <div class="card-rating">★★★★★ 4.8/5 Average Rating (12 community reviews)</div>
+                    <button class="btn-primary" onclick="showScreen('test-drive-booking')" style="width: 100%; margin-top: 20px; padding: 15px;">Schedule Test Drive</button>
+                    <button class="btn-success" onclick="showScreen('checkout')" style="width: 100%; margin-top: 10px; padding: 15px;">Ready to Buy</button>
+                </div>
+            </div>
+
+            <section>
+                <div class="tabs">
+                    <button class="tab-btn active" onclick="switchTab(event, 'expert-report')">Expert Report</button>
+                    <button class="tab-btn" onclick="switchTab(event, 'reviews')">Reviews & Test Drives</button>
+                    <button class="tab-btn" onclick="switchTab(event, 'details')">Details</button>
+                </div>
+
+                <!-- Expert Report Tab -->
+                <div id="expert-report" class="tab-content active">
+                    <h3>Expert Inspection Report</h3>
+                    <p style="margin-bottom: 20px; color: #666;">Inspected by: <strong>Mike Johnson</strong> - Certified Mechanic (⭐ 4.9/5)</p>
+
+                    <div style="background: #f0fdf4; border-left: 4px solid #10b981; padding: 15px; margin-bottom: 20px;">
+                        <p><strong>Overall Condition Score: 8.7/10</strong></p>
+                        <p style="color: #666; font-size: 14px;">This vehicle is in excellent condition with minimal wear. All major systems functioning properly.</p>
+                    </div>
+
+                    <h4 style="margin-top: 25px; margin-bottom: 15px; font-size: 16px;">Condition Assessment</h4>
+                    <div class="inspection-item">
+                        <div class="inspection-label">Engine & Mechanical</div>
+                        <div class="inspection-score score-good">9/10</div>
+                    </div>
+                    <div class="inspection-item">
+                        <div class="inspection-label">Transmission</div>
+                        <div class="inspection-score score-good">9/10</div>
+                    </div>
+                    <div class="inspection-item">
+                        <div class="inspection-label">Suspension & Steering</div>
+                        <div class="inspection-score score-good">8/10</div>
+                    </div>
+                    <div class="inspection-item">
+                        <div class="inspection-label">Brakes</div>
+                        <div class="inspection-score score-good">8/10</div>
+                    </div>
+                    <div class="inspection-item">
+                        <div class="inspection-label">Exterior Condition</div>
+                        <div class="inspection-score score-fair">7/10</div>
+                    </div>
+                    <div class="inspection-item">
+                        <div class="inspection-label">Interior Condition</div>
+                        <div class="inspection-score score-good">8/10</div>
+                    </div>
+                    <div class="inspection-item">
+                        <div class="inspection-label">Electrical Systems</div>
+                        <div class="inspection-score score-good">9/10</div>
+                    </div>
+                    <div class="inspection-item">
+                        <div class="inspection-label">Safety Features</div>
+                        <div class="inspection-score score-good">9/10</div>
+                    </div>
+
+                    <div style="background: #fef3c7; border-left: 4px solid #f59e0b; padding: 15px; margin-top: 20px;">
+                        <p><strong>Minor Issues Found:</strong></p>
+                        <ul style="margin-left: 20px; color: #666; font-size: 14px;">
+                            <li>Small dent on right rear bumper (cosmetic, no structural damage)</li>
+                            <li>Windshield wipers nearing end of life (recommend replacement soon)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Reviews Tab -->
+                <div id="reviews" class="tab-content">
+                    <h3>Community Reviews (12 Test Drives)</h3>
+                    <p style="margin-bottom: 20px; color: #666;">Average Rating: <strong>★★★★★ 4.8/5</strong></p>
+
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div>
+                                <div class="reviewer-info">Sarah Chen</div>
+                                <div class="reviewer-date">March 23, 2026 (5 days ago)</div>
+                            </div>
+                            <div class="stars">★★★★★ 5/5</div>
+                        </div>
+                        <div class="review-text">
+                            <strong>Excellent condition! Very smooth ride.</strong><br>
+                            The car drives beautifully. Engine is quiet and responsive. Interior smells fresh and clean. Seller was very professional. Would definitely buy from them. Highly recommended!
+                        </div>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div>
+                                <div class="reviewer-info">Mike Rodriguez</div>
+                                <div class="reviewer-date">March 20, 2026 (8 days ago)</div>
+                            </div>
+                            <div class="stars">★★★★☆ 4/5</div>
+                        </div>
+                        <div class="review-text">
+                            <strong>Great value, few minor cosmetic issues</strong><br>
+                            Overall solid car at a fair price. Some light cosmetic wear on the bumper (mentioned in inspection too). Engine runs smoothly and transmission shifts perfectly. Tires are relatively new.
+                        </div>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div>
+                                <div class="reviewer-info">Jennifer Park</div>
+                                <div class="reviewer-date">March 18, 2026 (10 days ago)</div>
+                            </div>
+                            <div class="stars">★★★★★ 5/5</div>
+                        </div>
+                        <div class="review-text">
+                            <strong>Perfect for my needs!</strong><br>
+                            This Camry is exactly what I was looking for. Comfortable, reliable, and well-maintained. Test drive confirmed what the inspection report said. Already made an offer!
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Details Tab -->
+                <div id="details" class="tab-content">
+                    <h3>Vehicle Details</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <div>
+                            <p><strong>Make:</strong> Toyota</p>
+                            <p><strong>Model:</strong> Camry</p>
+                            <p><strong>Year:</strong> 2020</p>
+                            <p><strong>Mileage:</strong> 45,000 miles</p>
+                        </div>
+                        <div>
+                            <p><strong>Transmission:</strong> Automatic</p>
+                            <p><strong>Fuel Type:</strong> Gasoline</p>
+                            <p><strong>Body Type:</strong> Sedan</p>
+                            <p><strong>Color:</strong> Silver</p>
+                        </div>
+                    </div>
+
+                    <h4 style="margin-top: 25px; margin-bottom: 15px;">Service History</h4>
+                    <p style="color: #666;">✓ Regular oil changes documented</p>
+                    <p style="color: #666;">✓ Tire rotations up to date</p>
+                    <p style="color: #666;">✓ All recalls completed</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- TEST DRIVE BOOKING -->
+        <div id="test-drive-booking" class="screen">
+            <div class="breadcrumb">
+                <a onclick="showScreen('listing-details')">Back to Listing</a>
+            </div>
+            <h1>Schedule Test Drive - 2020 Toyota Camry</h1>
+
+            <section>
+                <h2>Select Date & Time</h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Preferred Date</label>
+                        <input type="date">
+                    </div>
+                    <div class="form-group">
+                        <label>Time Slot</label>
+                        <select>
+                            <option>9:00 AM - 10:00 AM</option>
+                            <option>10:00 AM - 11:00 AM</option>
+                            <option>2:00 PM - 3:00 PM</option>
+                            <option>3:00 PM - 4:00 PM</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Your Information</h2>
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" placeholder="John Doe">
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" placeholder="+1 (555) 123-4567">
+                </div>
+                <div class="form-group">
+                    <label>Questions for Seller</label>
+                    <textarea placeholder="Any specific concerns or things you want to check?"></textarea>
+                </div>
+            </section>
+
+            <button class="btn-success" onclick="showScreen('test-drive-confirmed')">Book Test Drive</button>
+            <button class="btn-secondary" onclick="showScreen('listing-details')">Cancel</button>
+        </div>
+
+        <!-- TEST DRIVE CONFIRMED -->
+        <div id="test-drive-confirmed" class="screen">
+            <div class="alert success">
+                <strong>✓ Test Drive Scheduled!</strong> Your appointment is confirmed for April 2, 2026 at 10:00 AM.
+            </div>
+
+            <h1>Test Drive Confirmation</h1>
+            <p style="color: #666; margin-bottom: 20px;">The seller will contact you soon to confirm the meeting place.</p>
+
+            <section>
+                <h2>What to Prepare</h2>
+                <div class="card-grid">
+                    <div class="card" style="cursor: default;">
+                        <h3>📋 Documents</h3>
+                        <p>Bring ID and proof of insurance</p>
+                    </div>
+                    <div class="card" style="cursor: default;">
+                        <h3>⏱️ Time</h3>
+                        <p>Plan for 45 minutes to 1 hour</p>
+                    </div>
+                    <div class="card" style="cursor: default;">
+                        <h3>🎯 Focus</h3>
+                        <p>Check acceleration, handling, braking, comfort</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h3>After Your Test Drive</h3>
+                <p style="color: #666; margin-bottom: 15px;">You'll have the opportunity to share your experience with our community and help other buyers make informed decisions.</p>
+                <button class="btn-primary" onclick="alert('Your review form will appear after the test drive')">Write Review (After Test Drive)</button>
+            </section>
+
+            <button class="btn-secondary" onclick="showScreen('listing-details')">Back to Listing</button>
+        </div>
+
+        <!-- SUBMIT REVIEW -->
+        <div id="submit-review" class="screen">
+            <div class="breadcrumb">
+                <a onclick="showScreen('listing-details')">Back to Listing</a>
+            </div>
+            <h1>Share Your Test Drive Experience</h1>
+            <p style="color: #666; margin-bottom: 20px;">Help other buyers by rating and reviewing this vehicle.</p>
+
+            <section>
+                <h2>Rate This Vehicle</h2>
+
+                <div class="rating-group">
+                    <label class="rating-label">Engine Performance</label>
+                    <div class="rating-stars">
+                        <span class="star active" onclick="setRating(this, 5)">★</span>
+                        <span class="star active" onclick="setRating(this, 4)">★</span>
+                        <span class="star active" onclick="setRating(this, 3)">★</span>
+                        <span class="star active" onclick="setRating(this, 2)">★</span>
+                        <span class="star" onclick="setRating(this, 1)">★</span>
+                    </div>
+                </div>
+
+                <div class="rating-group">
+                    <label class="rating-label">Comfort & Ergonomics</label>
+                    <div class="rating-stars">
+                        <span class="star active" onclick="setRating(this, 5)">★</span>
+                        <span class="star active" onclick="setRating(this, 4)">★</span>
+                        <span class="star active" onclick="setRating(this, 3)">★</span>
+                        <span class="star active" onclick="setRating(this, 2)">★</span>
+                        <span class="star" onclick="setRating(this, 1)">★</span>
+                    </div>
+                </div>
+
+                <div class="rating-group">
+                    <label class="rating-label">Handling & Braking</label>
+                    <div class="rating-stars">
+                        <span class="star active" onclick="setRating(this, 5)">★</span>
+                        <span class="star active" onclick="setRating(this, 4)">★</span>
+                        <span class="star active" onclick="setRating(this, 3)">★</span>
+                        <span class="star active" onclick="setRating(this, 2)">★</span>
+                        <span class="star" onclick="setRating(this, 1)">★</span>
+                    </div>
+                </div>
+
+                <div class="rating-group">
+                    <label class="rating-label">Overall Recommendation</label>
+                    <div class="rating-stars">
+                        <span class="star active">★</span>
+                        <span class="star active">★</span>
+                        <span class="star active">★</span>
+                        <span class="star active">★</span>
+                        <span class="star active">★</span>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Your Review</h2>
+                <div class="form-group">
+                    <label>Title (What stood out?)</label>
+                    <input type="text" placeholder="Excellent condition! Very smooth ride.">
+                </div>
+                <div class="form-group">
+                    <label>Detailed Review</label>
+                    <textarea placeholder="Share what you liked, what could be improved, any concerns...">The car drives beautifully. Engine is quiet and responsive. Interior smells fresh and clean. Seller was very professional.</textarea>
+                </div>
+            </section>
+
+            <button class="btn-success" onclick="showScreen('review-submitted')">Submit Review</button>
+            <button class="btn-secondary" onclick="showScreen('listing-details')">Cancel</button>
+        </div>
+
+        <!-- REVIEW SUBMITTED -->
+        <div id="review-submitted" class="screen">
+            <div class="alert success">
+                <strong>✓ Thank you!</strong> Your review has been published and is now visible to other buyers.
+            </div>
+
+            <h1>Review Published Successfully</h1>
+            <p style="color: #666; margin-bottom: 20px;">Your feedback helps our community make better decisions. Thank you for being part of SocialDrive!</p>
+
+            <button class="btn-primary" onclick="showScreen('browse-listings')">Continue Shopping</button>
+        </div>
+
+        <!-- CHECKOUT / PURCHASE -->
+        <div id="checkout" class="screen">
+            <div class="breadcrumb">
+                <a onclick="showScreen('listing-details')">Back to Listing</a>
+            </div>
+            <h1>Ready to Purchase</h1>
+
+            <div class="grid-2">
+                <section>
+                    <h2>Seller Information</h2>
+                    <div style="background: #f9fafb; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                        <p><strong>John Smith</strong></p>
+                        <p style="color: #666; font-size: 14px;">Member since 2025</p>
+                        <div class="card-rating">★★★★★ 4.9/5 (23 transactions)</div>
+                        <p style="color: #666; margin-top: 10px; font-size: 14px;">All transactions in the last 12 months completed successfully</p>
+                    </div>
+
+                    <h2>Vehicle Summary</h2>
+                    <div style="background: #f9fafb; padding: 20px; border-radius: 8px;">
+                        <p><strong>2020 Toyota Camry</strong></p>
+                        <p style="color: #666; font-size: 14px;">45,000 miles | Expert Verified | 4.8/5 rating</p>
+                        <p style="margin-top: 15px; color: #666; font-size: 13px;">Inspection Score: 8.7/10 | Community Reviews: 12</p>
+                    </div>
+                </section>
+
+                <section>
+                    <h2>Complete Your Purchase</h2>
+
+                    <div class="alert">
+                        By making this offer, you agree to SocialDrive's buyer protection and escrow service.
+                    </div>
+
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" placeholder="Your Full Name">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" placeholder="your@email.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Phone</label>
+                        <input type="tel" placeholder="+1 (555) 123-4567">
+                    </div>
+
+                    <div class="order-summary">
+                        <div class="order-line">
+                            <span>2020 Toyota Camry</span>
+                            <span>$18,500.00</span>
+                        </div>
+                        <div class="order-line">
+                            <span>Buyer Protection Fee</span>
+                            <span>$100.00</span>
+                        </div>
+                        <div class="order-line">
+                            <span>Documentation Service</span>
+                            <span>$50.00</span>
+                        </div>
+                        <div class="order-total">
+                            <span>Total Amount</span>
+                            <span>$18,650.00</span>
+                        </div>
+                    </div>
+
+                    <button class="btn-success" onclick="showScreen('payment-method')" style="width: 100%; padding: 15px; margin-top: 20px;">Proceed to Payment</button>
+                    <button class="btn-secondary" onclick="showScreen('listing-details')" style="width: 100%; padding: 12px; margin-top: 10px;">Cancel</button>
+                </section>
+            </div>
+        </div>
+
+        <!-- PAYMENT METHOD -->
+        <div id="payment-method" class="screen">
+            <h1>Select Payment Method</h1>
+
+            <section>
+                <h2>How would you like to pay?</h2>
+                <div class="card-grid" style="grid-template-columns: 1fr 1fr;">
+                    <div class="card" onclick="showScreen('payment-processing')" style="border: 2px solid #2563eb; cursor: pointer;">
+                        <h3>💳 Credit Card</h3>
+                        <p>Visa, Mastercard, Amex</p>
+                    </div>
+                    <div class="card" style="cursor: pointer;">
+                        <h3>🏦 Bank Transfer</h3>
+                        <p>Direct bank payment (ACH)</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Payment Information</h2>
+                <div class="form-group">
+                    <label>Card Number</label>
+                    <input type="text" placeholder="4532 1234 5678 9010">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Expiry Date</label>
+                        <input type="text" placeholder="MM/YY">
+                    </div>
+                    <div class="form-group">
+                        <label>CVV</label>
+                        <input type="text" placeholder="123">
+                    </div>
+                </div>
+
+                <button class="btn-success" onclick="showScreen('payment-processing')" style="width: 100%; padding: 15px;">Process Payment</button>
+                <button class="btn-secondary" onclick="showScreen('checkout')" style="width: 100%; padding: 12px; margin-top: 10px;">Back</button>
+            </section>
+        </div>
+
+        <!-- PAYMENT PROCESSING -->
+        <div id="payment-processing" class="screen">
+            <div style="text-align: center; padding: 60px 0;">
+                <div style="font-size: 48px; margin-bottom: 20px;">💳</div>
+                <h1>Processing Payment...</h1>
+                <p style="color: #666; margin: 20px 0;">Please wait while we process your payment securely.</p>
+                <div style="width: 300px; height: 4px; background: #e0e0e0; border-radius: 2px; margin: 30px auto; overflow: hidden;">
+                    <div style="width: 100%; height: 100%; background: #2563eb; border-radius: 2px; animation: progress 2s ease-in-out forwards;"></div>
+                </div>
+            </div>
+        </div>
+
+        <style>
+            @keyframes progress {
+                from { width: 0%; }
+                to { width: 100%; }
+            }
+        </style>
+
+        <!-- PURCHASE CONFIRMATION -->
+        <div id="purchase-confirmation" class="screen">
+            <div class="alert success">
+                <strong>✓ Purchase Confirmed!</strong> Congratulations! Your offer to purchase the 2020 Toyota Camry has been received and is now in escrow.
+            </div>
+
+            <h1>Your Purchase is Confirmed</h1>
+
+            <section>
+                <h2>Next Steps</h2>
+                <div class="card-grid">
+                    <div class="card" style="cursor: default;">
+                        <h3>1️⃣ Seller Confirms</h3>
+                        <p>Seller will review and confirm your offer within 24 hours.</p>
+                    </div>
+                    <div class="card" style="cursor: default;">
+                        <h3>2️⃣ Final Walkthrough</h3>
+                        <p>Schedule final inspection before completing transaction.</p>
+                    </div>
+                    <div class="card" style="cursor: default;">
+                        <h3>3️⃣ Title Transfer</h3>
+                        <p>SocialDrive will facilitate and store title documents.</p>
+                    </div>
+                    <div class="card" style="cursor: default;">
+                        <h3>4️⃣ Your Car!</h3>
+                        <p>Receive keys and complete ownership transfer.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Transaction Details</h2>
+                <div style="background: #f9fafb; padding: 20px; border-radius: 8px;">
+                    <div class="order-line">
+                        <span>Transaction ID:</span>
+                        <span>#TXBR2020120456</span>
+                    </div>
+                    <div class="order-line">
+                        <span>Vehicle:</span>
+                        <span>2020 Toyota Camry</span>
+                    </div>
+                    <div class="order-line">
+                        <span>Purchase Price:</span>
+                        <span>$18,500.00</span>
+                    </div>
+                    <div class="order-line">
+                        <span>Total Paid:</span>
+                        <span>$18,650.00</span>
+                    </div>
+                    <div class="order-line">
+                        <span>Escrow Status:</span>
+                        <span style="color: #10b981; font-weight: bold;">Protected</span>
+                    </div>
+                </div>
+            </section>
+
+            <button class="btn-primary" onclick="showScreen('my-transactions')" style="width: 100%; padding: 15px;">View My Transactions</button>
+        </div>
+
+        <!-- MY TRANSACTIONS -->
+        <div id="my-transactions" class="screen">
+            <h1>My Activity</h1>
+
+            <section>
+                <h2>Active Transactions</h2>
+                <div class="card-grid" style="grid-template-columns: 1fr;">
+                    <div class="card" style="cursor: pointer;">
+                        <div style="display: flex; justify-content: space-between; align-items: start;">
+                            <div>
+                                <h3>2020 Toyota Camry - PURCHASE IN PROGRESS</h3>
+                                <p style="color: #666; font-size: 14px;">Seller John Smith</p>
+                                <p style="margin-top: 10px;"><strong>$18,650</strong></p>
+                                <p style="color: #f59e0b; font-size: 13px; margin-top: 8px;">⏳ Awaiting seller confirmation</p>
+                            </div>
+                            <span style="background: #2563eb; color: white; padding: 8px 12px; border-radius: 4px; font-size: 12px;">In Progress</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Completed Transactions</h2>
+                <div class="card-grid" style="grid-template-columns: 1fr;">
+                    <div class="card" style="cursor: pointer;">
+                        <div style="display: flex; justify-content: space-between; align-items: start;">
+                            <div>
+                                <h3>2018 Honda Civic - COMPLETED</h3>
+                                <p style="color: #666; font-size: 14px;">Purchased from Sarah Lee</p>
+                                <p style="margin-top: 10px;"><strong>$14,200</strong></p>
+                                <p style="color: #10b981; font-size: 13px; margin-top: 8px;">✓ Completed Mar 15, 2026</p>
+                            </div>
+                            <span style="background: #10b981; color: white; padding: 8px 12px; border-radius: 4px; font-size: 12px;">Completed</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>SocialDrive © 2026 | Connecting buyers and sellers with expert verification and community trust</p>
+    </footer>
+
+    <script>
+        function showScreen(screenId) {
+            // Hide all screens
+            const screens = document.querySelectorAll('.screen');
+            screens.forEach(screen => screen.classList.remove('active'));
+
+            // Show selected screen
+            const selectedScreen = document.getElementById(screenId);
+            if (selectedScreen) {
+                selectedScreen.classList.add('active');
+                window.scrollTo(0, 0);
+            }
+        }
+
+        function switchTab(event, tabName) {
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(tab => tab.classList.remove('active'));
+
+            // Remove active class from all tabs
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            tabBtns.forEach(btn => btn.classList.remove('active'));
+
+            // Show selected tab
+            const selectedTab = document.getElementById(tabName);
+            if (selectedTab) {
+                selectedTab.classList.add('active');
+            }
+
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+
+        function setRating(element, rating) {
+            const parent = element.parentElement;
+            const stars = parent.querySelectorAll('.star');
+            stars.forEach((star, index) => {
+                if (index < rating) {
+                    star.classList.add('active');
+                } else {
+                    star.classList.remove('active');
+                }
+            });
+        }
+
+        // Start on home screen
+        window.addEventListener('load', () => {
+            showScreen('home');
+        });
+    </script>
+</body>
+</html>

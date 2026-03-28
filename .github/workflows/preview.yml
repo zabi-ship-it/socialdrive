@@ -1,0 +1,27 @@
+name: Preview URL Comment
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  comment:
+    name: Post Vercel Preview Link
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+
+    steps:
+      - name: Comment preview link on PR
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const prNumber = context.payload.pull_request.number;
+            const sha = context.payload.pull_request.head.sha.substring(0, 7);
+            const body = `## Vercel Preview\n\nA preview deployment will be available at:\n\`https://socialdrive-git-${context.payload.pull_request.head.ref.replace(/\//g, '-')}-zabi-ship-it.vercel.app\`\n\n> Vercel deploys this automatically on every push to this PR. Check the **Deployments** tab for the live link.`;
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: prNumber,
+              body,
+            });
